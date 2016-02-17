@@ -59,8 +59,9 @@ function createCluster (logger) {
 
 function run (cluster) {
 
-    mongoose.connect('mongodb://mongodb://localhost/admin-dev');
-  
+    //mongoose.connect('mongodb://mongodb://localhost/admin-dev');
+    mongoose.connect('mongodb://ciaf_dev:Password123@ds062178.mongolab.com:62178/schedule-api');
+
     // Set up logging
     var logger = logging.createLogger(config.get('logging'));
 
