@@ -1,0 +1,29 @@
+{
+  "name": "schedule-api",
+  "version": "0.0.0",
+  "private": true,
+  "main": "server.js",
+
+  "dependencies": {
+    "bunyan": "^1.4.0",
+    "busboy": "^0.2.12",
+    "config": "^1.14.0",
+    "fast-csv": "^1.0.0",
+    "forever": "^0.14.1",
+    "fs": "0.0.2",
+    "json5": "^0.4.0",
+    "mongoose": "^4.4.3",
+    "restify": "^3.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "chai": "^3.0.0",
+    "supertest": "^1.0.1",
+    "bunyan-prettystream": "hadfieldn/node-bunyan-prettystream"
+  },
+  "engine": {
+    "node": ">=0.10"
+  }
+}
+
+
