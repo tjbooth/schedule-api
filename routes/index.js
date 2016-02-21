@@ -18,8 +18,8 @@ function initialize(server, logger) {
 };
 
 var routes = [
-  'test',
-  'schedule'
+  'events',
+  'users'
 ];
 
 module.exports = function(server, logger) {

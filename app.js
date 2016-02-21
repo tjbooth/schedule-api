@@ -29,6 +29,7 @@ function createServer (logger) {
 
   server.use(restify.acceptParser(server.acceptable));
   server.use(restify.queryParser());
+  server.use(restify.bodyParser({ mapParams: false }));
   
   server.on('NotFound', function (req, res, next) {
     if (logger) {

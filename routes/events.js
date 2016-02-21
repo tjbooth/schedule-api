@@ -1,18 +1,14 @@
 var restify = require('restify');
 
-var mongoose = require('mongoose');
+var Busboy = require("busboy");
 
-var database = require('../repository/database');
+var Csv = require("fast-csv");
 
-var busboy = require("busboy");
+var EventsRepository = require('../repository/eventsRepository');
 
-var csv = require("fast-csv");
+logging = require('../logging')
+config = require('config')
 
-var fs = require('fs');
-
-var formidable = require('formidable');
-
-var actsRepository = require('../repository/actsRepository');
 
 module.exports = function(server, logger) {
 
@@ -24,12 +20,12 @@ module.exports = function(server, logger) {
 
 function get(req, res, next) {
 	
-	var repositoryInstance = new actsRepository();
+	var eventsRepository = new EventsRepository();
 
 	var sort = req.params.sort;
 	var order = req.params.order;
 
-	repositoryInstance.get(sort, order, function (arr, data) {
+	eventsRepository.get(sort, order, function (arr, data) {
 		res.send(data);
 	});
 
@@ -38,29 +34,29 @@ function get(req, res, next) {
 
 function post(req, res, next) {
 
+
+var logger = logging.createLogger(config.get('logging'));
+
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
-	var repositoryInstance = new actsRepository();
+	var eventsRepository = new EventsRepository();
 
-	var act = repositoryInstance.create();
-	act.name = "aa - from new post - not content"
-	act.sortName = "zz - sort"
+    logger.error(req.body);
+	eventsRepository.upsert(req.body);
 
-	repositoryInstance.insert(act, function () {
-	    res.send(req.body);
-	  });
-    
+	res.send(req.body);
+
     return next();
 };
 
 function upload(req, res, next) {
 
-	var repositoryInstance = new actsRepository();
+	var eventsRepository = new EventsRepository();
 
-	var csvStream = csv({headers: true})
+	var csvStream = Csv({headers: true})
 		.on("data", function(data){
-			repositoryInstance.upsert(data);
+			eventsRepository.upsert(data);
 		})
 		.on("end", function(){
 		})
@@ -68,7 +64,7 @@ function upload(req, res, next) {
         	res.send(req.body);
 		});
 
-	var fileStream = new busboy({ headers: req.headers });  
+	var fileStream = new Busboy({ headers: req.headers });  
 
 	req.pipe(fileStream);       
 
