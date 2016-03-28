@@ -9,6 +9,9 @@ module.exports = function(server, logger) {
 
 function get(req, res, next) {
 	
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
 	var actsRepository = new ActsRepository();
 
 	var sort = req.params.sort;

@@ -11,6 +11,9 @@ module.exports = function(server, logger) {
 
 function get(req, res, next) {
 	
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
 	var userRepository = new UserRepository();
 
 	var deviceId = req.params.deviceId;
