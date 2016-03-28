@@ -7,8 +7,6 @@ var path    = require('path'),
     config  = require('config'),
     routes  = require('./routes');
 
-var swagger = require('swagger-restify');
-
 exports.createServer = createServer;
 
 
