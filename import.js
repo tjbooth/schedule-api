@@ -1,5 +1,5 @@
 conn = new Mongo();
-db = conn.getDB("admin-dev");
+db = conn.getDB("schedule-api");
 
 db.acts.find().snapshot().forEach( function (act) {
 	act.tags = act.tags.split(',');
