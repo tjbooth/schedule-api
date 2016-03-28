@@ -7,6 +7,7 @@ var path    = require('path'),
     config  = require('config'),
     routes  = require('./routes');
 
+var swagger = require('swagger-restify');
 
 exports.createServer = createServer;
 
@@ -29,7 +30,7 @@ function createServer (logger) {
 
   server.use(restify.acceptParser(server.acceptable));
   server.use(restify.queryParser());
-  server.use(restify.bodyParser({ mapParams: false }));
+  server.use(restify.bodyParser({ mapParams: true }));
   
   server.on('NotFound', function (req, res, next) {
     if (logger) {

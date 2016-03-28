@@ -1,0 +1,26 @@
+#%RAML 1.0
+title: ScheduleAPI
+version: v1
+baseUri: http://api.chilled-schedule.azurewebsites.net
+types:
+  Act:
+    type: object
+    properties:
+      name: string
+      sortName: string
+      description: string
+      type: string
+      day: string
+      contributor: string
+      start: date
+      end: date
+/acts:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "name" : "Hello World"
+              }

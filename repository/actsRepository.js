@@ -2,30 +2,28 @@ var Mongoose = require('mongoose/');
 
 var database = require('../repository/database');
 
-var EventSchema = new Mongoose.Schema({
+var ActSchema = new Mongoose.Schema({
 	name: String,
 	sortName: String, 
 	description: String,
-	type: String,
-	day: String,
-	contributor: String,
+	tags: String,
 	start: Date,
 	end: Date
 }, {strict: false});
 
-var Event = Mongoose.model('Event', EventSchema);
+var Act = Mongoose.model('Act', ActSchema);
 
-var EventsRepository = function() {  
+var ActsRepository = function() {  
 
 	var self = this;
 
 	self.get = function (sort, order, onExec) {
 		database.ensureConnection();
-		Event.find().sort(sort).exec(onExec); 
+		Act.find().sort(sort).exec(onExec); 
 	};
 
 	self.upsert = function (data) {
-		Event.update(
+		Act.update(
 			{ 'name' : data.name },
 			data,
 			{ upsert: true },
@@ -35,4 +33,4 @@ var EventsRepository = function() {
 	};
 };
 
-module.exports = EventsRepository;
+module.exports = ActsRepository;

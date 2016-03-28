@@ -1,3 +1,3 @@
-name,sortName,description,genre,eventDay,start,end
-Tom,Saturday,test and updated thru azure,a genre,sat,,
-KENI,Saturday2,azure test2 and updated again,psy,fri,,
+id,name,sortName,description,genre,eventDay,start,end
+1,Tom,Saturday,upserted tom,a genre,sat,,
+2,KENI,Saturday2,azure test2 and updated again,psy,fri,,

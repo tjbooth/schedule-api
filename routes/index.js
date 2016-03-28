@@ -18,8 +18,8 @@ function initialize(server, logger) {
 };
 
 var routes = [
-  'events',
-  'users'
+  'users',
+  'acts'
 ];
 
 module.exports = function(server, logger) {
@@ -29,7 +29,9 @@ module.exports = function(server, logger) {
     try {
       require(path.join(__dirname, route))(server, logger);
     } catch (err) {
-      throw new Error("Can't load '" + route + "' route");
+      var fileName = path.join(__dirname, route);
+      console.log(fileName);
+      throw new Error("Can't load '" + fileName + "' route");
     }
   });
 };

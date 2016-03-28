@@ -4,22 +4,20 @@ var UserRepository = require('../repository/usersRepository');
 
 module.exports = function(server, logger) {
 
-	server.get('/users', get);
+	server.get('/users/:deviceId', get);
 	server.post('/users', post);
-	server.patch('/users', patch);
+	server.put('/users', put);
 };
 
 function get(req, res, next) {
 	
 	var userRepository = new UserRepository();
 
-	var userId = req.params.userId;
+	var deviceId = req.params.deviceId;
 
-	userRepository.get(userId, function (err, data) {
+	userRepository.get(deviceId, function (err, data) {
 		res.send(data);
 	});
-
-	//res.send(userId);
 
     return next();
 };
@@ -29,31 +27,27 @@ function post(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
+	var jsonBody = JSON.parse(req.body);
+
 	var userRepository = new UserRepository();
 
-	var user = userRepository.create();
-	user.name = "aa - from new post - not content";
-	user.userId = 
-	user.actId = 'abc';
-
-	userRepository.insert(user, function () {
-	    res.send(req.body);
-	  });
+	userRepository.insert(jsonBody, function () {
+		res.send(jsonBody);
+	});
     
     return next();
 };
 
-function patch(req, res, next) {
+function put(req, res, next) {
 
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
 	var userRepository = new UserRepository();
 
-	var userId = req.body.userId;
-	var favourite = JSON.parse(req.body.favourite);
+	var user = JSON.parse(req.body);
 
-	userRepository.addFavourite(userId, favourite, function(err, result) {
+	userRepository.update(user, function(err, result) {
 		res.send(result);
 	});
 
