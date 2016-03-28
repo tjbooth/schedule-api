@@ -4,7 +4,7 @@
 
 var path    = require('path'),
     restify = require('restify'),
-    config  = require('config'),
+    nconf  = require('nconf'),
     routes  = require('./routes');
 
 exports.createServer = createServer;
@@ -14,12 +14,10 @@ exports.createServer = createServer;
  * Set up server
  * @return the created server
  */
-function createServer (logger) {
+function createServer (logger, serverName) {
 
   var settings = {
-    name: (config.has('server.name') && config.get('server.name'))
-            ? config.get('server.name')
-            : require(path.join(__dirname, 'package')).name
+    name: serverName
   };
 
   if (logger) settings.log = logger;
