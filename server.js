@@ -16,13 +16,11 @@ exports.run = run;
 
 function run (cluster) {
 
-    nconf.argv().env();
-
     nconf.defaults( { logging : {
       dir : "logs",
       level : "debug" } } );
 
-    nconf.file({ file: 'config.json'});
+    nconf.file({ file: 'config.json'}).env();;
 
     mongoose.connect(nconf.get("database"));
 
