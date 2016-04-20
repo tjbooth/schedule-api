@@ -1,9 +1,0 @@
-{
-    "http" : {
-        "port" : 8080
-    },
-    "server" : {
-    	"name" : "Schedule API Dev"
-    },
-    "database" : "mongodb://localhost/schedule-api"
-}
