@@ -19,7 +19,8 @@ function initialize(server, logger) {
 
 var routes = [
   'users',
-  'acts'
+  'acts',
+  'locations'
 ];
 
 module.exports = function(server, logger) {

@@ -5,5 +5,5 @@
     "server" : {
     	"name" : "Schedule API Dev"
     },
-    "database" : "mongodb://localhost/admin-dev"
+    "database" : "mongodb://localhost/schedule-api"
 }
