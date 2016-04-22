@@ -1,3 +1,7 @@
+/*
+	this route is probably just for analystics ]
+	as notifications will be broadcast using tags
+*/
 var restify = require('restify');
 
 var UserRepository = require('../repository/usersRepository');

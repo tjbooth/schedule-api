@@ -8,7 +8,8 @@ var ActSchema = new Mongoose.Schema({
 	description: String,
 	tags: String,
 	start: Date,
-	end: Date
+	end: Date,
+	notified: Boolean
 }, {strict: false});
 
 var Act = Mongoose.model('Act', ActSchema);
@@ -31,6 +32,12 @@ var ActsRepository = function() {
 				//res.send(err);
 			});
 	};
+
+	self.getActsByTime = function (time, onExec) {
+		database.ensureConnection();
+		Act.find().exec(onExec); 
+	};
+
 };
 
 module.exports = ActsRepository;

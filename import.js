@@ -7,3 +7,9 @@ db.acts.find().snapshot().forEach( function (act) {
 	act.end = new Date(act.end);
 	db.acts.save(act);
 });
+
+
+db.locations.find().snapshot().forEach( function (location) {
+	location.tags = act.tags.split(',');
+	db.acts.save(act);
+});

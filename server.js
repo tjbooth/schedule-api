@@ -20,14 +20,15 @@ function run (cluster) {
       dir : "logs",
       level : "debug" } } );
 
-    nconf.file({ file: 'config.json'}).env();;
-
-    mongoose.connect(nconf.get("database"));
+    nconf.file({ file: 'config.json'}).env();
 
     //mongoose.connect('mongodb://ciaf_dev:Password123@ds062178.mongolab.com:62178/schedule-api');
 
     // Set up logging
     var logger = logging.createLogger(nconf.get('logging'));
+
+    mongoose.connect(nconf.get("database"));
+    logger.debug('connected to mongo database');
 
     var server = app.createServer(logger, nconf.get('server:name'));
 
@@ -35,7 +36,8 @@ function run (cluster) {
     var port = process.env.PORT || nconf.get('http:port');
     
     server.listen(port, function () {
-      console.log('%s listening at %s', server.name, server.url);
+        console.log('%s listening at %s', server.name, server.url);
+        logger.debug('%s listening at %s', server.name, server.url);
     });
 }
 
