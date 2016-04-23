@@ -4,6 +4,7 @@
   "private": true,
   "main": "server.js",
   "dependencies": {
+    "azure": "^0.10.6",
     "bunyan": "^1.4.0",
     "busboy": "^0.2.12",
     "fast-csv": "^1.0.0",
