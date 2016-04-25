@@ -6,6 +6,9 @@ var LocationSchema = new Mongoose.Schema({
 	name: String,
 	description: String,
 	tags: String,
+	url: String,
+	image: String,
+	type: String
 }, {strict: false});
 
 var Location = Mongoose.model('Location', LocationSchema);

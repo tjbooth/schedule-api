@@ -1,4 +1,4 @@
-id,name,tags
-1,dingly dell,dell
-2,beer tent,tent
-3,back home,front room
+id,name,description,tags,image
+1,dingly dell,the small stage,dell,http://chilled/dinglydell.jpg
+2,beer tent,the beer tent,tent,http://chilled/beer.jpg
+3,back home,front room,somewhere else,http://chilled/home.jpg
