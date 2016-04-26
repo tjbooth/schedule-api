@@ -10,8 +10,8 @@ var FavouriteSchema = new Mongoose.Schema({
 
 var UserSchema = new Mongoose.Schema({
 	name: String,
-	deviceId: String,
-	favourites: [FavouriteSchema]
+	deviceId: String//,
+	//favourites: [FavouriteSchema]
 }, { strict: false });
 
 
@@ -21,25 +21,15 @@ var UsersRepository = function() {
 
 	var self = this;
 
-	self.get = function (deviceId, onExec) {
+	self.upsert = function (data) {
 		database.ensureConnection();
-		User.findOne({ deviceId: deviceId }, 'name deviceId favourites', onExec);
-	};
-
-	self.insert = function (user, onSuccess) {
-   		database.ensureConnection();
-   		var entity = new User(user);
-   		entity.save(onSuccess);
-   	};
-
-	self.update = function (user, onResult) {
-		User.findOneAndUpdate(
-        { deviceId: user.deviceId },
-        user,
-        { safe: true, upsert: true, new : true },
-        function(err, model) {
-            onResult(err, model);
-        });
+		User.update(
+			{ 'deviceId' : data.deviceId },
+			data,
+			{ upsert: true },
+			function (err, thing) {
+				//res.send(err);
+			});
 	};
 };
 
