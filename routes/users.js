@@ -10,7 +10,7 @@ module.exports = function(server, logger) {
 
 	server.get('/users/:deviceId', get);
 	server.post('/users', post);
-	server.put('/users', put);
+	server.put('/users', post);
 };
 
 function get(req, res, next) {
@@ -34,29 +34,16 @@ function post(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
-	var jsonBody = JSON.parse(req.body);
-
 	var userRepository = new UserRepository();
 
-	userRepository.insert(jsonBody, function () {
-		res.send(jsonBody);
-	});
-    
+	var user = req.body;
+
+	//var user = JSON.parse(req.body);
+
+	console.log(user);
+	userRepository.upsert(user);
+
+	res.send(user);
+	
     return next();
 };
-
-function put(req, res, next) {
-
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
-	var userRepository = new UserRepository();
-
-	var user = JSON.parse(req.body);
-
-	userRepository.update(user, function(err, result) {
-		res.send(result);
-	});
-
-	return next;
-}
