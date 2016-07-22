@@ -35,7 +35,7 @@ function run (cluster) {
     // start listening
     var port = process.env.PORT || nconf.get('http:port');
     
-    server.listen(port, function () {
+    server.listen(port, '::', function () {
         console.log('%s listening at %s', server.name, server.url);
         logger.debug('%s listening at %s', server.name, server.url);
     });
